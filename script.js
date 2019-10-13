@@ -2,6 +2,25 @@
 
 function updateChecklist(e) {
    e.preventDefault();
+   fetch('https://handlers.education.launchcode.org/static/planets.json').then((response) => {
+      response.json().then((json) => {
+         const destination = document.querySelector('#missionTarget');
+         console.log(json)
+         let random = Math.floor(Math.random() * json.length);
+         console.log(json[random])
+         destination.innerHTML = `
+         <h2>Mission Destination</h2>
+            <ol>
+               <li>Name: ${json[random].name}</li>
+               <li>Diameter: ${json[random].diameter}</li>
+               <li>Star: ${json[random].star}</li>
+               <li>Distance from Earth: ${json[random].distance}</li>
+               <li>Number of Moons: ${json[random].moons}</li>
+            </ol>
+         <img src="${json[random].image}">
+      `;
+
+   
    let pilot = document.querySelector("input[name=pilotName]").value;
    let copilot = document.querySelector("input[name=copilotName").value;
    let fuel = document.querySelector('input[name=fuelLevel').value;
@@ -13,14 +32,14 @@ function updateChecklist(e) {
    let cargoStat = document.querySelector('#cargoStatus');
    let status = document.querySelector('#launchStatus');
    let notReadyMsg = `Shuttle not ready for launch`;
-   let readyMsg = `Shuttle ready for launch, LET'S LIGHT THIS CANDLE!`;
+   let readyMsg = ` The Shuttle ready for launch to ${json[random].name}, it's ${json[random]. distance}, LET'S LIGHT THIS CANDLE!`;
    let ready = 0;
    let charVal = /^[a-z\s]+$/ig;
    let numVal = /^[0-9]+$/ig;
    
    if (pilot.match(charVal)){
       pilotStat.style.visibility = 'visible';
-      pilotStat.innerHTML = `${pilot}`;
+      pilotStat.innerHTML = `Pilot: ${pilot}`;
       ready += 1;
    } else {
       pilotStat.style.visibility = 'hidden';
@@ -31,11 +50,11 @@ function updateChecklist(e) {
    
    if (copilot.match(charVal)){
       copilotStat.style.visibility = 'visible';
-      copilotStat.innerHTML = `${copilot}`;
+      copilotStat.innerHTML = `Co-Pilot: ${copilot}`;
       ready += 1;
    } else {
       copilotStat.style.visibility = 'hidden';
-      copilot = '';
+      copilot = '.';
       e.preventDefault();
       alert('Please enter valid co-pilot name.');
    }
@@ -76,38 +95,18 @@ function updateChecklist(e) {
    } else {
       status.innerHTML = `${notReadyMsg}`;
       status.style.color = 'red';
+      destination.innerHTML = ``;
    }
+   
+      })
+   })
 }
+
 
 window.addEventListener("load", function() {
    let form = document.querySelector("form");
    form.addEventListener("submit", updateChecklist);
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
