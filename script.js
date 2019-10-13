@@ -77,7 +77,7 @@ function updateChecklist(e) {
          cargoStat.innerHTML = `Unfortunately ${copilot}, ${cargo} kilograms of tequila has too much mass for the journey.`;
          cargoStat.style.visibility = 'hidden';
       } else {
-         cargoStat.innerHTML = `${cargo} kilograms of tequila is just enough to make the trip ${copilot}`;
+         cargoStat.innerHTML = `${cargo} kilograms of tequila is just enough to make the trip ${copilot}.`;
          cargoStat.style.visibility = 'visible';
          ready += 1;
       } 
