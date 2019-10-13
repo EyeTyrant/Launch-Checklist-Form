@@ -1,5 +1,4 @@
 // Write your JavaScript code here!
-
 function updateChecklist(e) {
    e.preventDefault();
    fetch('https://handlers.education.launchcode.org/static/planets.json').then((response) => {
@@ -20,7 +19,6 @@ function updateChecklist(e) {
          <img src="${json[random].image}">
       `;
 
-   
    let pilot = document.querySelector("input[name=pilotName]").value;
    let copilot = document.querySelector("input[name=copilotName").value;
    let fuel = document.querySelector('input[name=fuelLevel').value;
@@ -102,14 +100,10 @@ function updateChecklist(e) {
    })
 }
 
-
 window.addEventListener("load", function() {
    let form = document.querySelector("form");
    form.addEventListener("submit", updateChecklist);
 })
-
-
-
 
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
